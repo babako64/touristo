@@ -1,0 +1,124 @@
+version: '3.4'
+
+services:
+  flightdb:
+    container_name: flightdb
+    environment:
+      SA_PASSWORD: "SwN12345678"
+      ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+        - "1433:1433"
+
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+        - "5672:5672"
+        - "15672:15672"
+
+  hoteldb:
+    container_name: hoteldb
+    environment:
+      SA_PASSWORD: "SwN12345678"
+      ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+        - "1434:1433"
+
+  searchdb:
+    container_name: searchdb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db 
+
+  bookdb:
+    container_name: bookdb
+    environment:
+      SA_PASSWORD: "SwN12345678"
+      ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+        - "1435:1433"
+
+  pgadmin:
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@aspnetrun.com
+      - PGADMIN_DEFAULT_PASSWORD=admin1234
+    restart: always
+    ports:
+        - "5050:80"
+    volumes:
+      - pgadmin_data:/root/.pgadmin
+
+  marketingdb:
+    container_name: marketingdb
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=MarketingDb
+    restart: always
+    ports:
+        - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  flightservice.api:
+    container_name: flightservice.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:FlightConnectionString=Server=flightdb;Database=TouristoFlightDb;User Id=sa;Password=SwN12345678"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+    depends_on:
+        - flightdb
+        - rabbitmq
+    ports:
+        - "8001:80"
+
+  hotelservice.api:
+    container_name: hotelservice.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:HotelConnectionString=Server=hoteldb;Database=TouristoHotelDb;User Id=sa;Password=SwN12345678"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+    depends_on:
+        - hoteldb
+        - rabbitmq
+    ports:
+        - "8002:80"
+
+
+  searchservice.api:
+    container_name: searchservice.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=mongodb://searchdb:27017"
+    depends_on:
+      - searchdb
+    ports:
+      - "8003:80"
+
+
+  bookservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:BookConnectionString=Server=bookdb;Database=TouristoBookDb;User Id=sa;Password=SwN12345678"
+    depends_on:
+      - bookdb
+    ports:
+      - "8004:80"
+
+
+  marketingservice.api:
+    container_name: marketingservice.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=Server=marketingdb;Port=5432;Database=MarketingDb;User Id=admin;Password=admin1234;"
+    depends_on:
+      - marketingdb
+    ports:
+      - "8005:80"
+

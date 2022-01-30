@@ -1,0 +1,230 @@
+{
+    "Routes": [
+        //Flight
+        {
+            "DownstreamPathTemplate": "/api/Flight",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "flightService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Flight",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        },
+        {
+            "DownstreamPathTemplate": "/api/Flight/{id}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "flightService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Flight/{id}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        },
+        {
+            "DownstreamPathTemplate": "/api/Flight/GetFlightListByIds",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "flightService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Flight/GetFlightListByIds",
+            "UpstreamHttpMethod": [ "POST" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        },
+        {
+            "DownstreamPathTemplate": "/api/Flight/search",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "flightService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Flight/search",
+            "UpstreamHttpMethod": [ "POST" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        },
+        //Hotel
+        {
+            "DownstreamPathTemplate": "/api/Hotel",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "hotelService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Hotel",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        },
+        {
+            "DownstreamPathTemplate": "/api/Hotel/{id}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "hotelService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Hotel/{id}",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        },
+        {
+            "DownstreamPathTemplate": "/api/Hotel/GetHotelListByIds",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "hotelService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Hotel/GetHotelListByIds",
+            "UpstreamHttpMethod": [ "POST" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        },
+        {
+            "DownstreamPathTemplate": "/api/Hotel/search",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "hotelService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Hotel/search",
+            "UpstreamHttpMethod": [ "POST" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        },
+        //Marketing
+        {
+            "DownstreamPathTemplate": "/api/Markup",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "marketingService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Markup",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        },
+        {
+            "DownstreamPathTemplate": "/api/Markup/{id}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "marketingService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Markup/{id}",
+            "UpstreamHttpMethod": [ "GET" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        },
+        {
+            "DownstreamPathTemplate": "/api/Markup/markup-list/{markupType}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "marketingService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Markup/markup-list/{markupType}",
+            "UpstreamHttpMethod": [ "GET" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        },
+        {
+            "DownstreamPathTemplate": "/api/Markup/airline/{airline}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "marketingService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Markup/airline/{airline}",
+            "UpstreamHttpMethod": [ "GET" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        },
+        {
+            "DownstreamPathTemplate": "/api/Markup/airline",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "marketingService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Markup/airline",
+            "UpstreamHttpMethod": [ "POST" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        },
+        //Search
+        {
+            "DownstreamPathTemplate": "/api/Search",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "searchService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Search",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        },
+        {
+            "DownstreamPathTemplate": "/api/Search/GetCachedSearch",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "searchService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Search/GetCachedSearch",
+            "UpstreamHttpMethod": [ "POST" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        },
+        {
+            "DownstreamPathTemplate": "/api/Search/all",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "searchService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Search/all",
+            "UpstreamHttpMethod": [ "DELETE" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        },
+        //Book
+        {
+            "DownstreamPathTemplate": "/api/Book",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "bookService.api",
+                    "Port": "80"
+                }
+            ],
+            "UpstreamPathTemplate": "/Book",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+            "FileCacheOptions": { "TtlSeconds": 30 }
+        }
+    ]
+}

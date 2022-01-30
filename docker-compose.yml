@@ -1,0 +1,54 @@
+version: '3.4'
+
+services:
+
+  flightdb:
+    image: mcr.microsoft.com/mssql/server
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+  hoteldb:
+    image: mcr.microsoft.com/mssql/server
+  searchdb:
+    image: mongo
+  bookdb:
+    image: mcr.microsoft.com/mssql/server
+  pgadmin:
+    image: dpage/pgadmin4
+  marketingdb:
+    image: postgres
+
+  flightservice.api:
+    image: ${DOCKER_REGISTRY-}flightserviceapi
+    build:
+      context: .
+      dockerfile: Src/Services/FlightService/FlightService.API/Dockerfile
+
+  hotelservice.api:
+    image: ${DOCKER_REGISTRY-}hotelserviceapi
+    build:
+      context: .
+      dockerfile: Src/Services/HotelService/HotelService.API/Dockerfile
+
+
+  searchservice.api:
+    image: ${DOCKER_REGISTRY-}searchserviceapi
+    build:
+      context: .
+      dockerfile: Src/Services/SearchService/Search.API/Dockerfile
+
+  bookservice.api:
+    image: ${DOCKER_REGISTRY-}bookserviceapi
+    build:
+      context: .
+      dockerfile: Src/Services/BookService/BookService.API/Dockerfile
+
+  marketingservice.api:
+    image: ${DOCKER_REGISTRY-}marketingserviceapi
+    build:
+      context: .
+      dockerfile: Src/Services/MarketingService/MarketingService.API/Dockerfile
+
+volumes:
+  mongo_data:
+  postgres_data:
+  pgadmin_data:
